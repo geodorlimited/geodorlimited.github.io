@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GeoDor Fashion — Redefine Your Aesthetic</title>
+  <meta name="description" content="GeoDor Fashion — Curated fashion collections blending elegance with edge. Shop avant-garde, minimalist, streetwear and couture styles." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-follower" id="cursorFollower"></div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav__logo">
+    <a href="index.html">
+      <div class="nav__logo-wordmark">
+        <span class="logo-geo">GEO</span><span class="logo-dor">DOR</span>
+      </div>
+      <span class="logo-sub">Fashion</span>
+    </a>
+  </div>
+  <ul class="nav__links">
+    <li><a href="#collections">Collections</a></li>
+    <li><a href="#lookbook">Lookbook</a></li>
+    <li><a href="#about">Atelier</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav__actions">
+    <button class="btn-search" aria-label="Search" onclick="toggleSearch()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    </button>
+    <button class="btn-menu" id="menuBtn" aria-label="Menu" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="#collections" onclick="toggleMenu()">Collections</a></li>
+    <li><a href="#lookbook" onclick="toggleMenu()">Lookbook</a></li>
+    <li><a href="#about" onclick="toggleMenu()">About</a></li>
+    <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+  </ul>
+</div>
+
+<!-- SEARCH OVERLAY -->
+<div class="search-overlay" id="searchOverlay">
+  <button class="search-close" onclick="toggleSearch()">✕</button>
+  <div class="search-inner">
+    <p class="search-label">What are you looking for?</p>
+    <input type="text" class="search-input" placeholder="Search pieces, styles…" autofocus />
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+
+  <!-- Right image panel: gold-embossed logo on linen, darkened to reveal texture -->
+  <div class="hero__canvas">
+    <div class="hero__panel-right">
+      <img src="images/geodor_hero.png" alt="GeoDor Fashion" loading="eager" />
+    </div>
+    <div class="hero__glow"></div>
+    <div class="hero__vline"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="hero__content">
+    <div class="hero__eyebrow reveal"></div>
+    <h1 class="hero__title reveal">
+      <span>WEAR</span>
+      <em>YOUR</em>
+      <span>WORLD.</span>
+    </h1>
+    <p class="hero__sub reveal">Curated fashion for those who refuse to blend in.</p>
+    <div class="hero__accent-line reveal"></div>
+    <div class="hero__ctas reveal">
+      <a href="#collections" class="btn btn--primary">Explore Collections</a>
+      <a href="#lookbook" class="btn btn--ghost">View Lookbook</a>
+    </div>
+  </div>
+
+  <div class="hero__scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span>GEODOR FASHION</span><span>·</span>
+    <span>AVANT-GARDE</span><span>·</span>
+    <span>COUTURE</span><span>·</span>
+    <span>STREETWEAR</span><span>·</span>
+    <span>MINIMALIST</span><span>·</span>
+    <span>NEW ARRIVALS 2026</span><span>·</span>
+    <span>GEODOR FASHION</span><span>·</span>
+    <span>AVANT-GARDE</span><span>·</span>
+    <span>COUTURE</span><span>·</span>
+    <span>STREETWEAR</span><span>·</span>
+    <span>MINIMALIST</span><span>·</span>
+    <span>NEW ARRIVALS 2026</span><span>·</span>
+  </div>
+</div>
+
+<!-- COLLECTIONS -->
+<section class="collections" id="collections">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">/ Curated for You</div>
+      <h2 class="section-title">This Season's <em>Collections</em></h2>
+    </div>
+    <div class="collections-grid">
+
+      <div class="collection-card large reveal-up" data-aos>
+        <div class="collection-img img-placeholder" data-label="">
+          <div class="placeholder-inner">
+            <img src="images/women_6_new.jpeg" alt="Eclipse Coat 1" loading="lazy" />
+            <!-- <p>Avant-Garde Collection</p> -->
+            <!-- <span>800 × 1000 px</span> -->
+          </div>
+        </div>
+        <div class="collection-info">
+          <span class="collection-tag">New</span>
+          <h3>Avant-Garde</h3>
+          <p>Bold silhouettes that challenge convention. Architecture meets fashion.</p>
+          <a href="#lookbook" class="collection-link">See Lookbook →</a>
+        </div>
+      </div>
+
+      <div class="collection-card reveal-up" data-aos style="animation-delay:.1s">
+        <div class="collection-img img-placeholder" data-label="">
+          <div class="placeholder-inner">
+            <img src="images/men_1.jpeg" alt="Minimalist Collection" loading="lazy" />
+          </div>
+        </div>
+        <div class="collection-info">
+          <h3>Minimalist</h3>
+          <p>Less is everything. Pure form, refined cuts.</p>
+          <a href="#lookbook" class="collection-link">See Lookbook →</a>
+        </div>
+      </div>
+
+      <div class="collection-card reveal-up" data-aos style="animation-delay:.2s">
+        <div class="collection-img img-placeholder" data-label="">
+          <div class="placeholder-inner">
+            <img src="images/women_4.jpeg" alt="Streetwear Collection" loading="lazy" />
+          </div>
+        </div>
+        <div class="collection-info">
+          <span class="collection-tag">Hot</span>
+          <h3>Streetwear</h3>
+          <p>Urban energy. Comfort-forward, culture-driven.</p>
+          <a href="#lookbook" class="collection-link">See Lookbook →</a>
+        </div>
+      </div>
+
+      <div class="collection-card reveal-up" data-aos style="animation-delay:.3s">
+        <div class="collection-img img-placeholder" data-label="">
+          <div class="placeholder-inner">
+            <img src="images/women_1.jpeg" alt="Couture Collection" loading="lazy" />
+          </div>
+        </div>
+        <div class="collection-info">
+          <span class="collection-tag">Exclusive</span>
+          <h3>Couture</h3>
+          <p>Handcrafted luxury. Every stitch, intentional.</p>
+          <a href="#lookbook" class="collection-link">See Lookbook →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- STYLES / SHOP — commented out until shop is ready
+<section class="styles" id="styles">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">/ The Edit</div>
+      <h2 class="section-title">Shop <em>Styles</em></h2>
+    </div>
+    <div class="filter-tabs">
+      <button class="filter-tab active" onclick="filterProducts('all', this)">All</button>
+      <button class="filter-tab" onclick="filterProducts('avant-garde', this)">Avant-Garde</button>
+      <button class="filter-tab" onclick="filterProducts('minimalist', this)">Minimalist</button>
+      <button class="filter-tab" onclick="filterProducts('streetwear', this)">Streetwear</button>
+      <button class="filter-tab" onclick="filterProducts('couture', this)">Couture</button>
+    </div>
+    <div class="products-grid" id="productsGrid"></div>
+    <div class="load-more-wrap">
+      <button class="btn btn--outline" onclick="loadMore()">Load More Pieces</button>
+    </div>
+  </div>
+</section>
+-->
+
+<!-- LOOKBOOK STRIP -->
+<section class="lookbook" id="lookbook">
+  <div class="lookbook__header container">
+    <div class="section-tag">/ Editorial</div>
+    <h2 class="section-title">The <em>Lookbook</em></h2>
+  </div>
+  <div class="lookbook__scroll">
+    <div class="lookbook__track" id="lookbookTrack">
+
+      <div class="lookbook-item tall">
+        <div class="lookbook-img img-placeholder" data-label="">
+          <div class="placeholder-inner"><img src="images/women_5.jpeg" alt="Look 1 Coat" loading="lazy" /></div>
+        </div>
+        <div class="lookbook-caption">Structured Eclipse · AW26</div>
+      </div>
+
+      <div class="lookbook-item tall">
+        <div class="lookbook-img img-placeholder" data-label="">
+          <div class="placeholder-inner"><img src="images/men_2.jpeg" alt="Look 2 Coat" loading="lazy" /></div>
+        </div>
+        <div class="lookbook-caption">Nomad Series · SS26</div>
+      </div>
+
+      <div class="lookbook-item tall">
+        <div class="lookbook-img img-placeholder" data-label="">
+          <div class="placeholder-inner"><img src="images/women_3.jpeg" alt="Look 3 Coat" loading="lazy" /></div>
+        </div>
+        <div class="lookbook-caption">Monolith Edit · SS26</div>
+      </div>
+
+      <div class="lookbook-item">
+        <div class="lookbook-img img-placeholder" data-label="">
+          <div class="placeholder-inner"><img src="images/men_3.jpeg" alt="Look 4 Coat" loading="lazy" /></div>
+        </div>
+        <div class="lookbook-caption">Urban Drift · SS26</div>
+      </div>
+
+      <div class="lookbook-item">
+        <div class="lookbook-img img-placeholder" data-label="">
+          <div class="placeholder-inner"><img src="images/women_2.jpeg" alt="Look 5 Coat" loading="lazy" /></div>
+        </div>
+        <div class="lookbook-caption">Capsule Noir · AW26</div>
+      </div>
+
+      <div class="lookbook-item tall">
+        <div class="lookbook-img img-placeholder" data-label="">
+          <div class="placeholder-inner"><img src="images/women_7.jpeg" alt="Look 6 Coat" loading="lazy" /></div>
+        </div>
+        <div class="lookbook-caption">Couture Fragment · AW26</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT / ATELIER -->
+<section class="about" id="about">
+  <div class="container about__grid">
+    <div class="about__img-wrap">
+      <div class="about__img img-placeholder" data-label="">
+        <div class="placeholder-inner"><img src="images/women_6.jpeg" alt="Atelier" loading="lazy" /></div>
+      </div>
+      <div class="about__stat-card">
+        <div class="stat-number">4+</div>
+        <div class="stat-label">Years Crafting Vision</div>
+      </div>
+    </div>
+    <div class="about__content">
+      <div class="section-tag">/ Our Story</div>
+      <h2 class="section-title">Born from <em>Obsession</em></h2>
+      <p class="about__lead">GeoDor Fashion was founded on a single belief: clothing is the language of self.</p>
+      <p class="about__body">We build each collection around the tension between structure and freedom — geometric precision meeting organic movement. Every piece is an argument against mediocrity.</p>
+      <p class="about__body">From our atelier, we collaborate with artisans across three continents to source materials that are as responsible as they are beautiful.</p>
+      <div class="about__values">
+        <div class="value-item">
+          <div class="value-icon">◈</div>
+          <div>
+            <strong>Craftsmanship</strong>
+            <span>Every seam, intentional.</span>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">◈</div>
+          <div>
+            <strong>Sustainability</strong>
+            <span>Responsible sourcing, always.</span>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">◈</div>
+          <div>
+            <strong>Individuality</strong>
+            <span>Made for those who stand apart.</span>
+          </div>
+        </div>
+      </div>
+      <a href="#contact" class="btn btn--primary">Visit Our Atelier</a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="container">
+    <div class="section-tag center">/ Client Voices</div>
+    <h2 class="section-title center">What They're <em>Saying</em></h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"GeoDor changed how I think about getting dressed. These aren't just clothes — they're statements."</blockquote>
+        <div class="testimonial-author">
+          <!-- avatar placeholder removed — awaiting real images -->
+          <div><strong>Amara S.</strong><span>Lagos, Nigeria</span></div>
+        </div>
+      </div>
+      <div class="testimonial-card featured">
+        <div class="stars">★★★★★</div>
+        <blockquote>"The Avant-Garde collection is unlike anything I've worn. I receive compliments every single time."</blockquote>
+        <div class="testimonial-author">
+          <!-- avatar placeholder removed — awaiting real images -->
+          <div><strong>Léa M.</strong><span>Paris, France</span></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Fast shipping, incredible quality. The Couture piece I ordered exceeded every expectation."</blockquote>
+        <div class="testimonial-author">
+          <!-- avatar placeholder removed — awaiting real images -->
+          <div><strong>Yuki T.</strong><span>Tokyo, Japan</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter">
+  <div class="newsletter__inner">
+    <div class="section-tag center">/ Inner Circle</div>
+    <h2>Get First Access to <em>New Drops</em></h2>
+    <p>Join 40,000+ fashion-forward subscribers. No spam — only the good stuff.</p>
+    <div class="newsletter-form">
+      <input type="email" placeholder="your@email.com" id="newsletterEmail" />
+      <button onclick="subscribeNewsletter()" class="btn btn--primary">Subscribe</button>
+    </div>
+    <div class="newsletter-success" id="newsletterSuccess" style="display:none">
+      ✓ You're in. Welcome to the inner circle.
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container contact__grid">
+    <div class="contact__info">
+      <div class="section-tag">/ Reach Us</div>
+      <h2 class="section-title">Let's <em>Connect</em></h2>
+      <div class="contact-items">
+        <div class="contact-item">
+          <div class="contact-icon">✉</div>
+          <div>
+            <strong>Email</strong>
+            <a href="mailto:hello@geodorfashion.com">hello@geodorfashion.com</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">✉</div>
+          <div>
+            <strong>Orders & Support</strong>
+            <a href="mailto:orders@geodorfashion.com">orders@geodorfashion.com</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">✉</div>
+          <div>
+            <strong>Press & Collaborations</strong>
+            <a href="mailto:press@geodorfashion.com">press@geodorfashion.com</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <strong>Phone</strong>
+            <a href="tel:+447450890569">+44 7450 890569</a>
+          </div>
+        </div>
+      </div>
+      <div class="social-links">
+        <a href="#" aria-label="Instagram">IG</a>
+        <a href="#" aria-label="TikTok">TK</a>
+        <a href="#" aria-label="Pinterest">PT</a>
+        <a href="#" aria-label="X">𝕏</a>
+      </div>
+    </div>
+    <div class="contact__form">
+      <div class="form-group">
+        <input type="text" placeholder="Your Name" class="form-input" id="contactName" />
+      </div>
+      <div class="form-group">
+        <input type="email" placeholder="Your Email" class="form-input" id="contactEmail" />
+      </div>
+      <div class="form-group">
+        <select class="form-input" id="contactSubject">
+          <option value="">Select Inquiry Type</option>
+          <option>General Inquiry</option>
+          <option>Order Support</option>
+          <option>Press & Media</option>
+          <option>Collaboration</option>
+          <option>Custom / Couture Request</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <textarea class="form-input form-textarea" placeholder="Your Message…" id="contactMessage"></textarea>
+      </div>
+      <button class="btn btn--primary full-width" onclick="submitContact()">Send Message</button>
+      <div class="form-success" id="contactSuccess" style="display:none">
+        ✓ Message received. We'll be in touch within 24 hours.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <div class="footer-logo">
+          <div class="nav__logo-wordmark"><span class="logo-geo">GEO</span><span class="logo-dor">DOR</span></div>
+          <span class="logo-sub">Fashion</span>
+        </div>
+        <p>Fashion as language.<br/>Wear your world.</p>
+      </div>
+      <div class="footer__cols">
+        <div class="footer-col">
+          <h4>Discover</h4>
+          <ul>
+            <li><a href="#collections">Collections</a></li>
+            <li><a href="#lookbook">Lookbook</a></li>
+            <li><a href="#about">Atelier</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Info</h4>
+          <ul>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#">Sustainability</a></li>
+            <li><a href="#">Size Guide</a></li>
+            <li><a href="#">Press</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Help</h4>
+          <ul>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#">Shipping Policy</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">FAQ</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>© 2026 GeoDor Fashion. All rights reserved.</p>
+      <div class="footer__legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Cookie Policy</a>
+      </div>
+      <!-- payment badges — restore when shop is live -->
+    </div>
+  </div>
+</footer>
+
+<!-- CART SIDEBAR — commented out until shop is ready
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h3>Your Bag <span id="cartItemCount">(0)</span></h3>
+    <button onclick="toggleCart()" class="cart-close">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty" id="cartEmpty">
+      <div class="cart-empty-icon">◻</div>
+      <p>Your bag is empty.</p>
+      <a href="#styles" onclick="toggleCart()" class="btn btn--outline">Start Shopping</a>
+    </div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-subtotal">
+      <span>Subtotal</span>
+      <span id="cartSubtotal">$0.00</span>
+    </div>
+    <p class="cart-note">Shipping & taxes calculated at checkout</p>
+    <button class="btn btn--primary full-width" onclick="proceedToCheckout()">Checkout →</button>
+    <button class="btn btn--ghost full-width" onclick="toggleCart()">Continue Shopping</button>
+  </div>
+</div>
+-->
+
+<!-- PRODUCT MODAL — commented out until shop is ready -->
+<!-- CHECKOUT MODAL — commented out until shop is ready -->
+<!-- TOAST — commented out until shop is ready -->
+
+<!--
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/checkout.js"></script>
+-->
+<script src="js/main.js"></script>
+</body>
+</html>
