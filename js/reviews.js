@@ -18,15 +18,24 @@ import {
   orderBy, limit, onSnapshot, serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-// ---- 1. PASTE YOUR FIREBASE CONFIG HERE ----
+// Your web app's Firebase configuration
+
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+
+  apiKey: "AIzaSyDuRS0s-vZsutbzJ0yL2e5ooQMt_9PoFcM",
+
+  authDomain: "geodor-reviews-23b8d.firebaseapp.com",
+
+  projectId: "geodor-reviews-23b8d",
+
+  storageBucket: "geodor-reviews-23b8d.firebasestorage.app",
+
+  messagingSenderId: "864726090759",
+
+  appId: "1:864726090759:web:93e0acf1276b9a32f356a2"
+
 };
+
 
 // ---- DOM refs ----
 const form      = document.getElementById('reviewForm');
