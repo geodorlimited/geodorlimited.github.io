@@ -2,7 +2,10 @@
   "permissions": {
     "allow": [
       "PowerShell($node = \"C:\\\\Program Files\\\\nodejs\\\\node.exe\"; $scratch = \"C:\\\\Users\\\\jasme\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\j--geodor\\\\261b18b6-5d55-4d9d-9047-ba152e875172\\\\scratchpad\"; & $node \"$scratch\\\\config.test.mjs\"; Write-Output \"====================\"; & $node \"$scratch\\\\worker.test.mjs\")",
-      "PowerShell($node = \"C:\\\\Program Files\\\\nodejs\\\\node.exe\"; $scratch = \"C:\\\\Users\\\\jasme\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\j--geodor\\\\261b18b6-5d55-4d9d-9047-ba152e875172\\\\scratchpad\"; Copy-Item \"j:\\\\geodor\\\\js\\\\admin.js\" \"$scratch\\\\js_admin.js.mjs\" -Force; & $node --check \"$scratch\\\\js_admin.js.mjs\"; if \\($LASTEXITCODE -eq 0\\) { Write-Output \"admin.js syntax PASS\" }; python \"$scratch\\\\linkcheck.py\"; python \"$scratch\\\\tagcheck.py\")"
+      "PowerShell($node = \"C:\\\\Program Files\\\\nodejs\\\\node.exe\"; $scratch = \"C:\\\\Users\\\\jasme\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\j--geodor\\\\261b18b6-5d55-4d9d-9047-ba152e875172\\\\scratchpad\"; Copy-Item \"j:\\\\geodor\\\\js\\\\admin.js\" \"$scratch\\\\js_admin.js.mjs\" -Force; & $node --check \"$scratch\\\\js_admin.js.mjs\"; if \\($LASTEXITCODE -eq 0\\) { Write-Output \"admin.js syntax PASS\" }; python \"$scratch\\\\linkcheck.py\"; python \"$scratch\\\\tagcheck.py\")",
+      "PowerShell(python \"C:\\\\Users\\\\jasme\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\j--geodor\\\\261b18b6-5d55-4d9d-9047-ba152e875172\\\\scratchpad\\\\theme_migrate.py\")",
+      "PowerShell(python \"C:\\\\Users\\\\jasme\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\j--geodor\\\\261b18b6-5d55-4d9d-9047-ba152e875172\\\\scratchpad\\\\theme_wire.py\")",
+      "PowerShell($node = \"C:\\\\Program Files\\\\nodejs\\\\node.exe\"; $scratch = \"C:\\\\Users\\\\jasme\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\j--geodor\\\\261b18b6-5d55-4d9d-9047-ba152e875172\\\\scratchpad\"; & $node --check \"j:\\\\geodor\\\\js\\\\theme.js\"; if \\($LASTEXITCODE -eq 0\\) { Write-Output \"theme.js syntax PASS\" }; python \"$scratch\\\\tagcheck.py\"; python \"$scratch\\\\linkcheck.py\")"
     ]
   }
 }

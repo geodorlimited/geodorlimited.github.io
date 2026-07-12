@@ -53,6 +53,7 @@ legal.html          Shipping / Returns / Privacy / Terms / Cookies (templates!)
 css/style.css       All styling
 js/config.js        ★ Central config: Firebase keys, checkout URL, currency, categories
 js/main.js          Shared UI (nav, cursor, toast, cart badge)
+js/theme.js         Day/night toggle (remembers each visitor's choice)
 js/shop.js          Shop logic (catalog, cart, Stripe redirect)
 js/admin.js         Admin panel logic
 js/forms.js         Newsletter + contact form → Firestore
