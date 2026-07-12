@@ -77,8 +77,16 @@ function toggleSearch() {
 }
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
-    document.getElementById('searchOverlay').classList.remove('open');
-    closeModal();
+    document.getElementById('searchOverlay')?.classList.remove('open');
+    window.closeModal?.(); // defined on the shop page
+  }
+});
+
+// On pages without a product grid, pressing Enter in search jumps to the shop
+document.querySelector('.search-input')?.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !document.getElementById('productsGrid')) {
+    const q = e.target.value.trim();
+    window.location.href = 'shop.html' + (q ? `?q=${encodeURIComponent(q)}` : '');
   }
 });
 
@@ -115,15 +123,25 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 // ---- TOAST ----
 function showToast(message) {
   const toast = document.getElementById('toast');
+  if (!toast) return;
   toast.textContent = message;
   toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 3000);
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(() => toast.classList.remove('show'), 3000);
 }
+window.showToast = showToast;
 
-// ---- SHIPPING OPTION CHANGE ----
-document.addEventListener('change', e => {
-  if (e.target.name === 'shipping') renderCheckoutTotals();
-});
+// ---- CART COUNT (shared across pages via localStorage) ----
+(function () {
+  const countEl = document.getElementById('cartCount');
+  if (!countEl) return;
+  try {
+    const cart = JSON.parse(localStorage.getItem('geodor_cart') || '[]');
+    const total = cart.reduce((sum, i) => sum + (i.qty || 0), 0);
+    countEl.textContent = total;
+    countEl.classList.toggle('show', total > 0);
+  } catch { /* ignore corrupt cart */ }
+})();
 
 // ---- PARALLAX HERO (subtle) ----
 window.addEventListener('scroll', () => {

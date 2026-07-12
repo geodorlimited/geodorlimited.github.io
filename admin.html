@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — GeoDor Fashion</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="admin-body">
+
+<!-- ADMIN TOP BAR -->
+<nav class="nav scrolled admin-nav">
+  <div class="nav__logo">
+    <a href="index.html">
+      <div class="nav__logo-wordmark">
+        <span class="logo-geo">GEO</span><span class="logo-dor">DOR</span>
+      </div>
+      <span class="logo-sub">Admin</span>
+    </a>
+  </div>
+  <div class="nav__actions">
+    <span class="admin-user" id="adminUser"></span>
+    <button class="btn btn--outline btn--sm" id="signOutBtn" style="display:none">Sign Out</button>
+  </div>
+</nav>
+
+<!-- ═══════════ LOGIN VIEW ═══════════ -->
+<section class="admin-login" id="loginView">
+  <form class="admin-login__card" id="loginForm">
+    <div class="section-tag">/ Shop Owner Access</div>
+    <h1 class="section-title">Admin <em>Login</em></h1>
+    <div class="form-group">
+      <input type="email" class="form-input" id="loginEmail" placeholder="Email" autocomplete="username" required />
+    </div>
+    <div class="form-group">
+      <input type="password" class="form-input" id="loginPassword" placeholder="Password" autocomplete="current-password" required />
+    </div>
+    <button type="submit" class="btn btn--primary full-width" id="loginBtn">Sign In</button>
+    <button type="button" class="admin-link" id="forgotBtn">Forgot password?</button>
+    <p class="admin-status" id="loginStatus" aria-live="polite"></p>
+  </form>
+</section>
+
+<!-- ═══════════ DASHBOARD VIEW ═══════════ -->
+<section class="admin-dash" id="dashView" style="display:none">
+  <div class="container">
+
+    <div class="admin-tabs" id="adminTabs">
+      <button class="filter-tab active" data-tab="products">Products</button>
+      <button class="filter-tab" data-tab="orders">Orders</button>
+      <button class="filter-tab" data-tab="messages">Messages <span class="tab-badge" id="msgBadge"></span></button>
+      <button class="filter-tab" data-tab="subscribers">Subscribers</button>
+      <button class="filter-tab" data-tab="reviews">Reviews</button>
+    </div>
+
+    <!-- ── PRODUCTS TAB ── -->
+    <div class="admin-tab-panel" id="tab-products">
+      <div class="admin-toolbar">
+        <h2>Catalog <span class="admin-count" id="productCount"></span></h2>
+        <div>
+          <button class="btn btn--outline btn--sm" id="seedBtn" style="display:none">Import Starter Products</button>
+          <button class="btn btn--primary btn--sm" id="newProductBtn">+ Add Product</button>
+        </div>
+      </div>
+
+      <!-- product editor -->
+      <form class="admin-editor" id="productEditor" style="display:none">
+        <h3 id="editorTitle">New Product</h3>
+        <div class="admin-form-grid">
+          <div class="form-group span-2">
+            <label>Name *</label>
+            <input class="form-input" id="pName" required maxlength="120" placeholder="Eclipse Structured Coat" />
+          </div>
+          <div class="form-group">
+            <label>Category *</label>
+            <select class="form-input" id="pCategory"></select>
+          </div>
+          <div class="form-group">
+            <label>Badge</label>
+            <select class="form-input" id="pBadge">
+              <option value="">None</option>
+              <option value="new">New</option>
+              <option value="sale">Sale</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Price *</label>
+            <input class="form-input" id="pPrice" type="number" min="0" step="0.01" required placeholder="485" />
+          </div>
+          <div class="form-group">
+            <label>Original price (for sale strikethrough)</label>
+            <input class="form-input" id="pOriginalPrice" type="number" min="0" step="0.01" placeholder="Leave empty if not on sale" />
+          </div>
+          <div class="form-group span-2">
+            <label>Description</label>
+            <textarea class="form-input form-textarea" id="pDescription" maxlength="2000" placeholder="Tell the story of this piece…"></textarea>
+          </div>
+          <div class="form-group span-2">
+            <label>Sizes (comma-separated)</label>
+            <input class="form-input" id="pSizes" placeholder="XS, S, M, L, XL" />
+          </div>
+          <div class="form-group span-2">
+            <label>Colors</label>
+            <div id="colorRows"></div>
+            <button type="button" class="btn btn--outline btn--sm" id="addColorBtn">+ Add Color</button>
+          </div>
+          <div class="form-group span-2">
+            <label>Images — repo path (e.g. <code>images/women_1.jpeg</code>) or full URL</label>
+            <div id="imageRows"></div>
+            <button type="button" class="btn btn--outline btn--sm" id="addImageBtn">+ Add Image</button>
+          </div>
+          <div class="form-group">
+            <label>Material</label>
+            <input class="form-input" id="pMaterial" placeholder="82% Wool, 18% Cashmere" />
+          </div>
+          <div class="form-group">
+            <label>Care</label>
+            <input class="form-input" id="pCare" placeholder="Dry clean only." />
+          </div>
+          <div class="form-group admin-checks span-2">
+            <label class="check-label"><input type="checkbox" id="pInStock" checked /> In stock</label>
+            <label class="check-label"><input type="checkbox" id="pActive" checked /> Visible in shop</label>
+          </div>
+        </div>
+        <div class="admin-editor__actions">
+          <button type="submit" class="btn btn--primary" id="saveProductBtn">Save Product</button>
+          <button type="button" class="btn btn--ghost" id="cancelEditBtn">Cancel</button>
+          <span class="admin-status" id="editorStatus" aria-live="polite"></span>
+        </div>
+      </form>
+
+      <div class="admin-list" id="productList"><p class="admin-muted">Loading…</p></div>
+    </div>
+
+    <!-- ── ORDERS TAB ── -->
+    <div class="admin-tab-panel" id="tab-orders" style="display:none">
+      <div class="admin-toolbar"><h2>Orders</h2></div>
+      <div class="admin-card">
+        <p>Orders, payments, refunds and customer shipping details are all managed in your
+          <strong>Stripe Dashboard</strong> — Stripe records every order automatically, emails you on each sale,
+          and sends the customer a receipt.</p>
+        <p style="margin-top:12px">
+          <a class="btn btn--primary btn--sm" href="https://dashboard.stripe.com/payments" target="_blank" rel="noopener">Open Stripe Dashboard →</a>
+        </p>
+        <p class="admin-muted" style="margin-top:16px">Tip: in Stripe → Settings → Business → Customer emails, turn on
+          “Successful payments” so customers get automatic receipts. Each payment lists the items, sizes and colors ordered plus the shipping address.</p>
+      </div>
+    </div>
+
+    <!-- ── MESSAGES TAB ── -->
+    <div class="admin-tab-panel" id="tab-messages" style="display:none">
+      <div class="admin-toolbar"><h2>Contact Messages</h2></div>
+      <div class="admin-list" id="messageList"><p class="admin-muted">Loading…</p></div>
+    </div>
+
+    <!-- ── SUBSCRIBERS TAB ── -->
+    <div class="admin-tab-panel" id="tab-subscribers" style="display:none">
+      <div class="admin-toolbar">
+        <h2>Newsletter Subscribers <span class="admin-count" id="subCount"></span></h2>
+        <button class="btn btn--outline btn--sm" id="exportSubsBtn">Export CSV</button>
+      </div>
+      <div class="admin-list" id="subscriberList"><p class="admin-muted">Loading…</p></div>
+    </div>
+
+    <!-- ── REVIEWS TAB ── -->
+    <div class="admin-tab-panel" id="tab-reviews" style="display:none">
+      <div class="admin-toolbar"><h2>Review Moderation</h2></div>
+      <p class="admin-muted" style="margin-bottom:20px">Reviews are posted publicly from the homepage. Delete anything abusive or spammy.</p>
+      <div class="admin-list" id="reviewList"><p class="admin-muted">Loading…</p></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script type="module" src="js/admin.js"></script>
+</body>
+</html>

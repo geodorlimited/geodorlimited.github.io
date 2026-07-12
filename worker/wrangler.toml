@@ -1,0 +1,26 @@
+# Cloudflare Worker config — only needed if you deploy with the
+# `wrangler` CLI. If you paste the code into the Cloudflare dashboard
+# instead (easiest — see DOCUMENTATION.md), you can ignore this file.
+#
+#   npm install -g wrangler
+#   wrangler login
+#   cd worker
+#   wrangler deploy
+#   wrangler secret put STRIPE_SECRET_KEY   (paste sk_test_... / sk_live_...)
+
+name = "geodor-checkout"
+main = "checkout.js"
+compatibility_date = "2026-01-01"
+
+[vars]
+FIREBASE_PROJECT_ID = "geodor-reviews-23b8d"
+SITE_URL = "https://www.geodorlimited.com"
+ALLOWED_ORIGINS = "https://www.geodorlimited.com,https://geodorlimited.com,https://geodorlimited.github.io,http://localhost:8000,http://127.0.0.1:8000"
+CURRENCY = "usd"
+FREE_SHIPPING_THRESHOLD = "150"
+SHIPPING_STANDARD = "9.99"
+SHIPPING_EXPRESS = "24.99"
+ALLOWED_COUNTRIES = "US,GB,CA,FR,DE,IT,ES,NL,BE,IE,GH,NG"
+
+# STRIPE_SECRET_KEY is a secret — never put it here.
+# Set it with:  wrangler secret put STRIPE_SECRET_KEY

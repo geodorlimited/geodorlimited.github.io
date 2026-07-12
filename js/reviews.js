@@ -12,30 +12,12 @@
 //    5. Paste the security rules from REVIEWS_SETUP.md into Firestore → Rules
 // ============================================
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import {
   getFirestore, collection, addDoc, query,
   orderBy, limit, onSnapshot, serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-// Your web app's Firebase configuration
-
-const firebaseConfig = {
-
-  apiKey: "AIzaSyDuRS0s-vZsutbzJ0yL2e5ooQMt_9PoFcM",
-
-  authDomain: "geodor-reviews-23b8d.firebaseapp.com",
-
-  projectId: "geodor-reviews-23b8d",
-
-  storageBucket: "geodor-reviews-23b8d.firebasestorage.app",
-
-  messagingSenderId: "864726090759",
-
-  appId: "1:864726090759:web:93e0acf1276b9a32f356a2"
-
-};
-
+import { firebaseConfig } from "./config.js";
 
 // ---- DOM refs ----
 const form      = document.getElementById('reviewForm');
@@ -89,15 +71,16 @@ function setStatus(msg, type) {
 // ---- Guard: not configured yet ----
 const isConfigured = !firebaseConfig.apiKey.startsWith('YOUR_');
 if (!isConfigured) {
-  emptyEl.textContent = 'Reviews go live once Firebase is connected (see js/reviews.js).';
+  emptyEl.textContent = 'Reviews go live once Firebase is connected (see js/config.js).';
   form.addEventListener('submit', e => {
     e.preventDefault();
-    setStatus('⚠ Connect Firebase first — see the setup steps in js/reviews.js.', 'err');
+    setStatus('⚠ Connect Firebase first — see the setup steps in js/config.js.', 'err');
   });
-  console.warn('[reviews] Firebase not configured — add your config in js/reviews.js');
+  console.warn('[reviews] Firebase not configured — add your config in js/config.js');
 } else {
-  // ---- Init Firebase ----
-  const db = getFirestore(initializeApp(firebaseConfig));
+  // ---- Init Firebase (may already be initialized by forms.js) ----
+  const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+  const db = getFirestore(app);
   const reviewsRef = collection(db, 'reviews');
 
   // ---- Real-time listener: render whenever the collection changes ----

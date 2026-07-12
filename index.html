@@ -27,6 +27,7 @@
     </a>
   </div>
   <ul class="nav__links">
+    <li><a href="shop.html">Shop</a></li>
     <li><a href="#collections">Collections</a></li>
     <li><a href="#lookbook">Lookbook</a></li>
     <li><a href="#about">Atelier</a></li>
@@ -36,6 +37,10 @@
     <button class="btn-search" aria-label="Search" onclick="toggleSearch()">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
     </button>
+    <a class="btn-cart" aria-label="Shopping bag" href="shop.html#cart">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <span class="cart-count" id="cartCount">0</span>
+    </a>
     <button class="btn-menu" id="menuBtn" aria-label="Menu" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </button>
@@ -45,6 +50,7 @@
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
   <ul>
+    <li><a href="shop.html">Shop</a></li>
     <li><a href="#collections" onclick="toggleMenu()">Collections</a></li>
     <li><a href="#lookbook" onclick="toggleMenu()">Lookbook</a></li>
     <li><a href="#about" onclick="toggleMenu()">About</a></li>
@@ -184,27 +190,15 @@
   </div>
 </section>
 
-<!-- STYLES / SHOP — commented out until shop is ready
-<section class="styles" id="styles">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-tag">/ The Edit</div>
-      <h2 class="section-title">Shop <em>Styles</em></h2>
-    </div>
-    <div class="filter-tabs">
-      <button class="filter-tab active" onclick="filterProducts('all', this)">All</button>
-      <button class="filter-tab" onclick="filterProducts('avant-garde', this)">Avant-Garde</button>
-      <button class="filter-tab" onclick="filterProducts('minimalist', this)">Minimalist</button>
-      <button class="filter-tab" onclick="filterProducts('streetwear', this)">Streetwear</button>
-      <button class="filter-tab" onclick="filterProducts('couture', this)">Couture</button>
-    </div>
-    <div class="products-grid" id="productsGrid"></div>
-    <div class="load-more-wrap">
-      <button class="btn btn--outline" onclick="loadMore()">Load More Pieces</button>
-    </div>
+<!-- SHOP CTA -->
+<section class="styles shop-cta" id="styles">
+  <div class="container" style="text-align:center">
+    <div class="section-tag center">/ The Edit</div>
+    <h2 class="section-title center">Shop <em>Styles</em></h2>
+    <p class="shop-cta__sub">The full collection — avant-garde, minimalist, streetwear and couture. Secure checkout, worldwide shipping.</p>
+    <a href="shop.html" class="btn btn--primary">Enter the Shop →</a>
   </div>
 </section>
--->
 
 <!-- LOOKBOOK STRIP -->
 <section class="lookbook" id="lookbook">
@@ -483,6 +477,7 @@
         <div class="footer-col">
           <h4>Discover</h4>
           <ul>
+            <li><a href="shop.html">Shop</a></li>
             <li><a href="#collections">Collections</a></li>
             <li><a href="#lookbook">Lookbook</a></li>
             <li><a href="#about">Atelier</a></li>
@@ -492,18 +487,16 @@
           <h4>Info</h4>
           <ul>
             <li><a href="#about">About Us</a></li>
-            <li><a href="#">Sustainability</a></li>
-            <li><a href="#">Size Guide</a></li>
-            <li><a href="#">Press</a></li>
+            <li><a href="legal.html#shipping">Shipping Policy</a></li>
+            <li><a href="legal.html#returns">Returns</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <h4>Help</h4>
           <ul>
             <li><a href="#contact">Contact</a></li>
-            <li><a href="#">Shipping Policy</a></li>
-            <li><a href="#">Returns</a></li>
-            <li><a href="#">FAQ</a></li>
+            <li><a href="legal.html#privacy">Privacy</a></li>
+            <li><a href="legal.html#terms">Terms</a></li>
           </ul>
         </div>
       </div>
@@ -511,51 +504,19 @@
     <div class="footer__bottom">
       <p>© 2026 GeoDor Fashion. All rights reserved.</p>
       <div class="footer__legal">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">Cookie Policy</a>
+        <a href="legal.html#privacy">Privacy Policy</a>
+        <a href="legal.html#terms">Terms of Service</a>
+        <a href="legal.html#cookies">Cookie Policy</a>
       </div>
-      <!-- payment badges — restore when shop is live -->
     </div>
   </div>
 </footer>
 
-<!-- CART SIDEBAR — commented out until shop is ready
-<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
-<div class="cart-sidebar" id="cartSidebar">
-  <div class="cart-header">
-    <h3>Your Bag <span id="cartItemCount">(0)</span></h3>
-    <button onclick="toggleCart()" class="cart-close">✕</button>
-  </div>
-  <div class="cart-items" id="cartItems">
-    <div class="cart-empty" id="cartEmpty">
-      <div class="cart-empty-icon">◻</div>
-      <p>Your bag is empty.</p>
-      <a href="#styles" onclick="toggleCart()" class="btn btn--outline">Start Shopping</a>
-    </div>
-  </div>
-  <div class="cart-footer" id="cartFooter" style="display:none">
-    <div class="cart-subtotal">
-      <span>Subtotal</span>
-      <span id="cartSubtotal">$0.00</span>
-    </div>
-    <p class="cart-note">Shipping & taxes calculated at checkout</p>
-    <button class="btn btn--primary full-width" onclick="proceedToCheckout()">Checkout →</button>
-    <button class="btn btn--ghost full-width" onclick="toggleCart()">Continue Shopping</button>
-  </div>
-</div>
--->
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
 
-<!-- PRODUCT MODAL — commented out until shop is ready -->
-<!-- CHECKOUT MODAL — commented out until shop is ready -->
-<!-- TOAST — commented out until shop is ready -->
-
-<!--
-<script src="js/products.js"></script>
-<script src="js/cart.js"></script>
-<script src="js/checkout.js"></script>
--->
 <script src="js/main.js"></script>
 <script type="module" src="js/reviews.js"></script>
+<script type="module" src="js/forms.js"></script>
 </body>
 </html>

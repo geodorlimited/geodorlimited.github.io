@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Confirmed — GeoDor Fashion</title>
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<nav class="nav scrolled">
+  <div class="nav__logo">
+    <a href="index.html">
+      <div class="nav__logo-wordmark">
+        <span class="logo-geo">GEO</span><span class="logo-dor">DOR</span>
+      </div>
+      <span class="logo-sub">Fashion</span>
+    </a>
+  </div>
+</nav>
+
+<section class="status-page">
+  <div class="order-success">
+    <div class="success-icon">✓</div>
+    <h2>Thank You</h2>
+    <p>Your payment was successful and your order is confirmed.</p>
+    <p>A receipt has been sent to your email by Stripe.</p>
+    <p class="order-number" id="orderRef"></p>
+    <p style="max-width:480px;margin:0 auto 32px">We're preparing your pieces with care. You'll hear from us when your order ships. Questions? <a href="mailto:operations@geodorlimited.com" style="color:var(--gold)">operations@geodorlimited.com</a></p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a href="shop.html" class="btn btn--primary">Continue Shopping</a>
+      <a href="index.html" class="btn btn--ghost">Back to Home</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  // The order is complete — empty the bag.
+  localStorage.removeItem('geodor_cart');
+
+  // Show a short order reference from the Stripe session id.
+  const sid = new URLSearchParams(location.search).get('session_id');
+  if (sid) {
+    document.getElementById('orderRef').textContent =
+      'Order Reference: GD-' + sid.replace(/^cs_(test_|live_)?/, '').slice(0, 10).toUpperCase();
+  }
+</script>
+</body>
+</html>

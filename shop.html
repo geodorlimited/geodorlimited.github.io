@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop — GeoDor Fashion</title>
+  <meta name="description" content="Shop GeoDor Fashion — avant-garde, minimalist, streetwear and couture pieces. Secure checkout." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-follower" id="cursorFollower"></div>
+
+<!-- NAV -->
+<nav class="nav scrolled" id="nav">
+  <div class="nav__logo">
+    <a href="index.html">
+      <div class="nav__logo-wordmark">
+        <span class="logo-geo">GEO</span><span class="logo-dor">DOR</span>
+      </div>
+      <span class="logo-sub">Fashion</span>
+    </a>
+  </div>
+  <ul class="nav__links">
+    <li><a href="shop.html" class="active">Shop</a></li>
+    <li><a href="index.html#collections">Collections</a></li>
+    <li><a href="index.html#lookbook">Lookbook</a></li>
+    <li><a href="index.html#about">Atelier</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <div class="nav__actions">
+    <button class="btn-search" aria-label="Search" onclick="toggleSearch()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    </button>
+    <button class="btn-cart" aria-label="Shopping bag" onclick="toggleCart()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+    <button class="btn-menu" id="menuBtn" aria-label="Menu" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="shop.html" onclick="toggleMenu()">Shop</a></li>
+    <li><a href="index.html#collections">Collections</a></li>
+    <li><a href="index.html#lookbook">Lookbook</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</div>
+
+<!-- SEARCH OVERLAY -->
+<div class="search-overlay" id="searchOverlay">
+  <button class="search-close" onclick="toggleSearch()">✕</button>
+  <div class="search-inner">
+    <p class="search-label">What are you looking for?</p>
+    <input type="text" class="search-input" id="shopSearch" placeholder="Search pieces, styles…" />
+  </div>
+</div>
+
+<!-- SHOP -->
+<section class="styles page-top" id="styles">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">/ The Edit</div>
+      <h2 class="section-title">Shop <em>Styles</em></h2>
+    </div>
+    <div class="filter-tabs" id="filterTabs"></div>
+    <p class="shop-status" id="shopStatus">Loading the collection…</p>
+    <div class="products-grid" id="productsGrid"></div>
+  </div>
+</section>
+
+<!-- PRODUCT MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
+<div class="product-modal" id="productModal" role="dialog" aria-modal="true">
+  <button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
+  <div class="modal-grid">
+    <div class="modal-images">
+      <div class="modal-main-img" id="modalMainImg"></div>
+      <div class="modal-thumbs" id="modalThumbs"></div>
+    </div>
+    <div class="modal-info">
+      <span class="modal-tag" id="modalTag"></span>
+      <h2 id="modalName"></h2>
+      <div class="modal-price" id="modalPrice"></div>
+      <p class="modal-desc" id="modalDesc"></p>
+      <div class="modal-option" id="modalSizeWrap">
+        <label>Size</label>
+        <div class="size-grid" id="modalSizes"></div>
+      </div>
+      <div class="modal-option" id="modalColorWrap">
+        <label>Color — <span id="modalColorName"></span></label>
+        <div class="color-swatches" id="modalColors"></div>
+      </div>
+      <div class="modal-qty">
+        <label>Quantity</label>
+        <div class="qty-controls">
+          <button onclick="changeQty(-1)" aria-label="Decrease quantity">−</button>
+          <span id="qtyDisplay">1</span>
+          <button onclick="changeQty(1)" aria-label="Increase quantity">+</button>
+        </div>
+      </div>
+      <button class="btn btn--primary full-width" id="modalAddBtn" onclick="addToCartFromModal()">Add to Bag</button>
+      <div class="modal-meta" id="modalMeta"></div>
+    </div>
+  </div>
+</div>
+
+<!-- CART SIDEBAR -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cartSidebar" aria-label="Shopping bag">
+  <div class="cart-header">
+    <h3>Your Bag <span id="cartItemCount">(0)</span></h3>
+    <button onclick="toggleCart()" class="cart-close" aria-label="Close bag">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-subtotal">
+      <span>Subtotal</span>
+      <span id="cartSubtotal">$0.00</span>
+    </div>
+    <p class="cart-note" id="cartNote">Shipping, taxes &amp; promo codes are handled at checkout</p>
+    <button class="btn btn--primary full-width" id="checkoutBtn" onclick="startCheckout()">Secure Checkout →</button>
+    <button class="btn btn--ghost full-width" onclick="toggleCart()">Continue Shopping</button>
+    <p class="cart-secure">🔒 Payments processed securely by Stripe</p>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <div class="footer-logo">
+          <div class="nav__logo-wordmark"><span class="logo-geo">GEO</span><span class="logo-dor">DOR</span></div>
+          <span class="logo-sub">Fashion</span>
+        </div>
+        <p>Fashion as language.<br/>Wear your world.</p>
+      </div>
+      <div class="footer__cols">
+        <div class="footer-col">
+          <h4>Discover</h4>
+          <ul>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="index.html#collections">Collections</a></li>
+            <li><a href="index.html#lookbook">Lookbook</a></li>
+            <li><a href="index.html#about">Atelier</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Info</h4>
+          <ul>
+            <li><a href="index.html#about">About Us</a></li>
+            <li><a href="legal.html#shipping">Shipping Policy</a></li>
+            <li><a href="legal.html#returns">Returns</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Help</h4>
+          <ul>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="legal.html#privacy">Privacy Policy</a></li>
+            <li><a href="legal.html#terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>© 2026 GeoDor Fashion. All rights reserved.</p>
+      <div class="footer__legal">
+        <a href="legal.html#privacy">Privacy Policy</a>
+        <a href="legal.html#terms">Terms of Service</a>
+        <a href="legal.html#cookies">Cookie Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script type="module" src="js/shop.js"></script>
+</body>
+</html>

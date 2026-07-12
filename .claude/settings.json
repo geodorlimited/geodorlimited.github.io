@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell($node = \"C:\\\\Program Files\\\\nodejs\\\\node.exe\"; $scratch = \"C:\\\\Users\\\\jasme\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\j--geodor\\\\261b18b6-5d55-4d9d-9047-ba152e875172\\\\scratchpad\"; & $node \"$scratch\\\\config.test.mjs\"; Write-Output \"====================\"; & $node \"$scratch\\\\worker.test.mjs\")"
+    ]
+  }
+}

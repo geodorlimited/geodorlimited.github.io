@@ -1,5 +1,12 @@
 # Live Reviews — Setup Guide
 
+> **Note (July 2026):** the site now has a full online shop. The Firebase config
+> moved to [js/config.js](js/config.js), and the complete security rules
+> (including the review rules below, plus shop/admin rules) live in
+> [firestore.rules](firestore.rules). For everything shop-related see
+> **[DOCUMENTATION.md](DOCUMENTATION.md)** — this file remains as background on
+> how the reviews feature works.
+
 The site has a **Community Reviews** section (`#reviews`) where anyone can post a
 star rating + review and see it appear instantly. It runs on **Firebase Firestore**,
 which works on static hosting like GitHub Pages and is free for this scale.
