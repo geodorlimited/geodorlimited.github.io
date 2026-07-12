@@ -19,11 +19,11 @@ export const SHOP = {
   // URL of your deployed checkout Cloudflare Worker.
   // Leave "" until you finish DOCUMENTATION.md → "Payments (Stripe)".
   // Example: "https://geodor-checkout.your-subdomain.workers.dev"
-  checkoutEndpoint: "",
+  checkoutEndpoint: "geodor-checkout.amoakovera14.workers.dev",
 
   // Display currency symbol. The actual charge currency is set in the
   // worker (CURRENCY variable) — keep the two consistent.
-  currencySymbol: "$",
+  currencySymbol: "£",
 
   // Shown as a note in the cart. The real free-shipping rule is
   // enforced by the worker (FREE_SHIPPING_THRESHOLD variable).
