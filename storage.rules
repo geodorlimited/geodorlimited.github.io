@@ -1,0 +1,22 @@
+rules_version = '2';
+
+// Firebase Storage rules — product photo uploads from the admin panel.
+// Paste into: Firebase console → Build → Storage → Rules → Publish.
+//
+// Same admin model as Firestore: only signed-in users with a document in
+// the Firestore /admins collection can upload; everyone can view photos
+// (they're product images on a public shop).
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /products/{file} {
+      allow read: if true;
+      allow create, update: if request.auth != null
+        && firestore.exists(/databases/(default)/documents/admins/$(request.auth.uid))
+        && request.resource.size < 5 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*');
+      allow delete: if request.auth != null
+        && firestore.exists(/databases/(default)/documents/admins/$(request.auth.uid));
+    }
+    // everything else in the bucket: no access
+  }
+}

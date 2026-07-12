@@ -19,7 +19,7 @@ export const SHOP = {
   // URL of your deployed checkout Cloudflare Worker.
   // Leave "" until you finish DOCUMENTATION.md → "Payments (Stripe)".
   // Example: "https://geodor-checkout.your-subdomain.workers.dev"
-  checkoutEndpoint: "geodor-checkout.amoakovera14.workers.dev",
+  checkoutEndpoint: "https://geodor-checkout.amoakovera14.workers.dev",
 
   // Display currency symbol. The actual charge currency is set in the
   // worker (CURRENCY variable) — keep the two consistent.

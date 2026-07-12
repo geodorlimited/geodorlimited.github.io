@@ -109,9 +109,14 @@
             <button type="button" class="btn btn--outline btn--sm" id="addColorBtn">+ Add Color</button>
           </div>
           <div class="form-group span-2">
-            <label>Images — repo path (e.g. <code>images/women_1.jpeg</code>) or full URL</label>
+            <label>Images — upload photos, or enter a repo path (e.g. <code>images/women_1.jpeg</code>) / full URL</label>
             <div id="imageRows"></div>
-            <button type="button" class="btn btn--outline btn--sm" id="addImageBtn">+ Add Image</button>
+            <div class="dyn-actions">
+              <button type="button" class="btn btn--primary btn--sm" id="uploadImageBtn">⬆ Upload Photos</button>
+              <button type="button" class="btn btn--outline btn--sm" id="addImageBtn">+ Add Image Link</button>
+              <input type="file" id="imageFileInput" accept="image/jpeg,image/png,image/webp" multiple hidden />
+            </div>
+            <p class="admin-muted" id="uploadStatus" style="margin-top:8px"></p>
           </div>
           <div class="form-group">
             <label>Material</label>

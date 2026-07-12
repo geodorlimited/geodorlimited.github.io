@@ -15,11 +15,15 @@ import {
   getFirestore, collection, doc, getDoc, addDoc, updateDoc, deleteDoc,
   onSnapshot, serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import {
+  getStorage, ref as storageRef, uploadBytes, getDownloadURL
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 import { firebaseConfig, SHOP, formatPrice } from "./config.js";
 
-const app  = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db   = getFirestore(app);
+const app     = initializeApp(firebaseConfig);
+const auth    = getAuth(app);
+const db      = getFirestore(app);
+const storage = getStorage(app);
 
 // ---- DOM ----
 const $ = id => document.getElementById(id);
@@ -261,6 +265,71 @@ function imageRow(src = '') {
 $('addColorBtn').addEventListener('click', () => $('colorRows').appendChild(colorRow()));
 $('addImageBtn').addEventListener('click', () => $('imageRows').appendChild(imageRow()));
 
+// ── Photo upload → Firebase Storage ──
+// Photos are downscaled/compressed in the browser (max 1600px JPEG) so the
+// shop stays fast and storage stays within the free allowance.
+$('uploadImageBtn').addEventListener('click', () => $('imageFileInput').click());
+
+$('imageFileInput').addEventListener('change', async e => {
+  const files = [...e.target.files];
+  e.target.value = ''; // allow re-selecting the same file later
+  if (!files.length) return;
+
+  const status = $('uploadStatus');
+  const btn = $('uploadImageBtn');
+  btn.disabled = true;
+
+  let done = 0;
+  try {
+    for (const file of files) {
+      status.textContent = `Uploading ${done + 1} of ${files.length} — ${file.name}…`;
+      if (!/^image\//.test(file.type)) throw new Error(`${file.name} is not an image`);
+
+      const blob = await compressImage(file);
+      const safeName = file.name.replace(/\.[^.]+$/, '').replace(/[^A-Za-z0-9_-]+/g, '-').slice(0, 40) || 'photo';
+      const path = `products/${Date.now()}-${safeName}.jpg`;
+      const snapshot = await uploadBytes(storageRef(storage, path), blob, { contentType: 'image/jpeg' });
+      const url = await getDownloadURL(snapshot.ref);
+
+      // drop the URL into the image list (replace a single empty row if present)
+      const emptyRow = [...$('imageRows').querySelectorAll('[data-role="img"]')].find(i => !i.value.trim());
+      if (emptyRow) {
+        emptyRow.value = url;
+        emptyRow.dispatchEvent(new Event('input'));
+      } else {
+        $('imageRows').appendChild(imageRow(url));
+      }
+      done++;
+    }
+    status.textContent = `✓ ${done} photo${done === 1 ? '' : 's'} uploaded. Remember to click Save Product.`;
+  } catch (err) {
+    console.error('[admin] upload error:', err);
+    status.textContent = {
+      'storage/unauthorized': 'Upload blocked — publish storage.rules in Firebase → Storage → Rules (see DOCUMENTATION.md §7.1).',
+      'storage/unknown': 'Upload failed — is Firebase Storage enabled? Console → Build → Storage → Get started (see DOCUMENTATION.md §7.1).',
+      'storage/retry-limit-exceeded': 'Upload failed — check your connection and try again.'
+    }[err.code] || `Upload failed (${err.code || err.message}). If Storage isn't set up yet, see DOCUMENTATION.md §7.1.`;
+  } finally {
+    btn.disabled = false;
+  }
+});
+
+async function compressImage(file, maxDim = 1600, quality = 0.85) {
+  try {
+    const bitmap = await createImageBitmap(file, { imageOrientation: 'from-image' });
+    const scale = Math.min(1, maxDim / Math.max(bitmap.width, bitmap.height));
+    const canvas = document.createElement('canvas');
+    canvas.width = Math.max(1, Math.round(bitmap.width * scale));
+    canvas.height = Math.max(1, Math.round(bitmap.height * scale));
+    canvas.getContext('2d').drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+    bitmap.close();
+    const blob = await new Promise(r => canvas.toBlob(r, 'image/jpeg', quality));
+    return blob || file;
+  } catch {
+    return file; // if anything goes wrong, upload the original
+  }
+}
+
 function openEditor(p = null) {
   editingId = p?.id || null;
   $('editorTitle').textContent = p ? `Edit — ${p.name}` : 'New Product';
@@ -309,6 +378,11 @@ $('productEditor').addEventListener('submit', async e => {
   })).filter(c => c.name);
   const images = [...$('imageRows').querySelectorAll('[data-role="img"]')]
     .map(i => i.value.trim()).filter(Boolean);
+  if (images.some(s => s.startsWith('data:') || s.length > 500)) {
+    status.textContent = 'Images must be a repo path (e.g. images/photo.jpg) or a normal https:// link — ' +
+      'pasted image data is too large to store and breaks checkout. Add the photo file to the images folder instead.';
+    return;
+  }
 
   const data = {
     name,

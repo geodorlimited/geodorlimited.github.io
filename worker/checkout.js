@@ -78,7 +78,7 @@ export default {
         subtotalCents += unitAmount * it.qty;
 
         const variant = [it.size, it.color].filter(Boolean).join(' / ');
-        const image = (p.images || [])[0];
+        const image = firstUsableImage(p.images, env.SITE_URL);
         return {
           quantity: it.qty,
           price_data: {
@@ -86,7 +86,7 @@ export default {
             unit_amount: unitAmount,
             product_data: {
               name: p.name + (variant ? ` — ${variant}` : ''),
-              ...(image ? { images: [absoluteUrl(image, env.SITE_URL)] } : {}),
+              ...(image ? { images: [image] } : {}),
               metadata: { productId: it.id, size: it.size || '', color: it.color || '' }
             }
           }
@@ -190,6 +190,18 @@ function json(obj, status, cors) {
 function absoluteUrl(path, siteUrl) {
   if (/^https?:\/\//i.test(path)) return path;
   return siteUrl.replace(/\/$/, '') + '/' + path.replace(/^\//, '');
+}
+
+// Stripe requires product images to be short, real URLs. Anything else
+// (e.g. base64 data pasted into the admin panel) is skipped so it can
+// never break checkout — the session is simply created without a thumbnail.
+function firstUsableImage(images, siteUrl) {
+  for (const img of images || []) {
+    if (typeof img !== 'string' || !img.trim() || img.startsWith('data:')) continue;
+    const url = absoluteUrl(img.trim(), siteUrl);
+    if (url.length <= 2048 && /^https?:\/\//i.test(url)) return url;
+  }
+  return null;
 }
 
 // Read one product from Firestore's public REST API.

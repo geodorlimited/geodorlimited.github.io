@@ -58,6 +58,7 @@ js/admin.js         Admin panel logic
 js/forms.js         Newsletter + contact form → Firestore
 js/reviews.js       Live public reviews (existing feature)
 firestore.rules     ★ Database security rules — must be published to Firebase
+storage.rules       Photo-upload security rules — publish if you enable Storage (§7.1)
 worker/checkout.js  ★ Cloudflare Worker that creates Stripe Checkout sessions
 worker/wrangler.toml  Optional CLI deployment config for the worker
 ```
@@ -72,6 +73,7 @@ Do these once, in order. Details for each step are in the sections below.
 - [ ] **B.** Enable Email/Password sign-in in Firebase Auth and create your admin account (§3.2)
 - [ ] **C.** Add your admin UID to the `admins` collection (§3.3)
 - [ ] **D.** Log in at `/admin.html`, click **Import Starter Products**, then edit them into your real catalog (§4)
+- [ ] **D2.** *(Optional)* Enable Firebase Storage + publish `storage.rules` so you can upload product photos straight from the admin panel (§7.1)
 - [ ] **E.** Create a Stripe account and get your **test** keys (§5.1)
 - [ ] **F.** Deploy the Cloudflare Worker and configure its variables (§5.2)
 - [ ] **G.** Put the worker URL into `js/config.js` → `SHOP.checkoutEndpoint` (§5.3)
@@ -292,14 +294,31 @@ restrict to first-time customers — no code changes needed.
 
 ### 7.1 Product photos
 
-Two options:
+Three options, in order of convenience:
 
-1. **In the repo (recommended):** copy the photo into `images/`, commit, push, then
-   reference it in the admin panel as `images/your_photo.jpg`. Portrait ~4:5 ratio
-   (e.g. 800×1000px), JPEG, ideally under ~300 KB each ([squoosh.app](https://squoosh.app)
+1. **Upload from the admin panel (easiest):** in the product editor click
+   **⬆ Upload Photos** and pick images from your computer. They're automatically
+   resized/compressed in the browser and stored in Firebase Storage; the URL is
+   filled in for you. **One-time setup required:**
+   - Firebase console → **Build → Storage → Get started** (pick the same region
+     as your Firestore database).
+     - *Note:* on newer Firebase projects, enabling Storage asks you to upgrade
+       to the **Blaze** plan (a card on file). Actual usage at this scale sits
+       inside the no-cost allowance, so the expected bill is still ~$0 — but if
+       you'd rather not add a card, use option 2 below instead; everything else
+       works the same.
+   - Storage → **Rules** tab → paste the contents of
+     [`storage.rules`](storage.rules) → **Publish**. (Same idea as the Firestore
+     rules: everyone may view photos, only admins may upload.)
+2. **In the repo:** copy the photo into `images/`, commit, push, then reference it
+   in the admin panel as `images/your_photo.jpg`. Portrait ~4:5 ratio (e.g.
+   800×1000px), JPEG, ideally under ~300 KB each ([squoosh.app](https://squoosh.app)
    is a free compressor).
-2. **Any hosted URL:** paste a full `https://...` image URL into the admin panel
+3. **Any hosted URL:** paste a full `https://...` image URL into the admin panel
    (e.g. from Cloudinary's free tier).
+
+Never paste raw image *data* (`data:image/...`) — the admin panel rejects it; it
+bloats the database and payment pages can't use it.
 
 The first image is the shop-grid thumbnail; additional images become gallery
 thumbnails in the product popup.
@@ -423,6 +442,9 @@ None of these are required to launch:
 | Checkout button: "Checkout is not live yet" | `SHOP.checkoutEndpoint` in `js/config.js` is still empty (§5.3). |
 | Checkout: CORS error in console | Your site's origin isn't in the worker's `ALLOWED_ORIGINS` (must match scheme+domain exactly, no trailing slash). |
 | Checkout: "Payment service error" | Worker's `STRIPE_SECRET_KEY` missing/typo'd, or you're mixing test key with live mode. Check the worker logs (Cloudflare → worker → Logs). |
+| Checkout: "Could not start checkout" | `SHOP.checkoutEndpoint` must be the **full** URL including `https://`. Also make sure the change is pushed — the live site reads the config from GitHub, not your computer. |
+| Product image doesn't show at checkout | The image must be a repo path or `https://` URL. Pasted image data (`data:image/...`) is skipped by the worker and rejected by the admin panel. |
+| Photo upload fails in admin panel | Storage not enabled yet, or `storage.rules` not published — both in §7.1. The upload error message says which. |
 | Stripe page shows wrong shipping/currency | Fix the worker variables (§5.2) — they control checkout; `js/config.js` only controls what the *site* displays. |
 | "A product in your bag is no longer available" | The product was deleted/hidden/marked sold-out after the customer bagged it. That's the safety net working. |
 | Reviews/contact form rejected | Rules validation: name/message length limits. Also check rules are published. |
