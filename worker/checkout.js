@@ -115,8 +115,8 @@ export default {
               display_name: subtotalCents >= freeShippingCents ? 'Standard Shipping (Free)' : 'Standard Shipping',
               fixed_amount: { amount: subtotalCents >= freeShippingCents ? 0 : standardCents, currency },
               delivery_estimate: {
-                minimum: { unit: 'business_day', value: 5 },
-                maximum: { unit: 'business_day', value: 10 }
+                minimum: { unit: 'business_day', value: 4 },
+                maximum: { unit: 'business_day', value: 5 }
               }
             }
           },
@@ -126,8 +126,8 @@ export default {
               display_name: 'Express Shipping',
               fixed_amount: { amount: expressCents, currency },
               delivery_estimate: {
-                minimum: { unit: 'business_day', value: 2 },
-                maximum: { unit: 'business_day', value: 4 }
+                minimum: { unit: 'business_day', value: 1 },
+                maximum: { unit: 'business_day', value: 2 }
               }
             }
           }

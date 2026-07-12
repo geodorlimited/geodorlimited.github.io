@@ -266,7 +266,38 @@ restrict to first-time customers — no code changes needed.
 5. Make one small real purchase yourself and refund it (**Payments → ⋯ → Refund**)
    to confirm everything works end to end.
 
-### 5.7 Fees & payouts
+### 5.7 Changing shipping fees
+
+Shipping is controlled by the worker's variables — Cloudflare dashboard →
+**Workers & Pages → geodor-checkout → Settings → Variables and Secrets**, then Deploy:
+
+| Variable | Controls | Example |
+|---|---|---|
+| `SHIPPING_STANDARD` | Standard Shipping price | `4.99` |
+| `SHIPPING_EXPRESS` | Express Shipping price | `12.99` |
+| `FREE_SHIPPING_THRESHOLD` | Subtotal at which Standard becomes free (`999999` = never) | `150` |
+| `ALLOWED_COUNTRIES` | Countries you ship to (2-letter codes) | `GB,US,GH` |
+| `CURRENCY` | Charge currency | `gbp` |
+
+Keep the display side in sync: `freeShippingThreshold` and `currencySymbol` in
+[`js/config.js`](js/config.js) control what the *cart* shows. The delivery-time
+wording ("5–10 business days") lives in the `delivery_estimate` blocks of
+[`worker/checkout.js`](worker/checkout.js) — edit and re-paste the worker to change it.
+
+### 5.8 Payment notifications
+
+- **Email to you on each sale:** Stripe Dashboard → your avatar (top right) →
+  **Profile → Notifications** → tick **Successful payments** (plus *Disputes* and
+  *Payout failures*). Per-user setting — each staff account sets its own.
+- **Receipt to the customer:** **Settings (⚙) → Business → Customer emails** →
+  enable **Successful payments** and **Refunds**. Automatic receipts send in
+  **live mode only** — test purchases don't trigger them.
+- **Push notification on your phone:** install the **Stripe Dashboard** app
+  (iOS/Android) and allow notifications — instant ping per sale, refunds on the go.
+- **Branding:** **Settings → Branding** puts your logo/colors on receipts and the
+  checkout page.
+
+### 5.9 Fees & payouts
 
 - No monthly cost. Typical fee ~**2.9% + 30¢** per successful card charge (US) or
   **1.5% + 20p** (UK domestic cards) — see https://stripe.com/pricing for your country.
