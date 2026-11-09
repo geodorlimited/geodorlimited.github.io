@@ -22,7 +22,7 @@ function animateFollower() {
 }
 animateFollower();
 
-document.querySelectorAll('a, button, .product-card, .collection-card, .size-btn, .color-swatch').forEach(el => {
+document.querySelectorAll('a, button, .product-card, .collection-card, .size-btn, .color-swatch, [data-full]').forEach(el => {
   el.addEventListener('mouseenter', () => {
     cursor.style.width = '14px'; cursor.style.height = '14px';
     follower.style.width = '48px'; follower.style.height = '48px';

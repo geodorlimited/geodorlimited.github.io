@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us — GeoDor Fashion</title>
+  <meta name="description" content="Inside GeoDor Fashion: a Milton Keynes atelier led by Ghanaian-trained designer Vera Amoako, uniting Ankara print, denim and tailoring with hand-folded detail." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/theme.js"></script>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-follower" id="cursorFollower"></div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav__logo">
+    <a href="index.html">
+      <div class="nav__logo-wordmark">
+        <span class="logo-geo">GEO</span><span class="logo-dor">DOR</span>
+      </div>
+      <span class="logo-sub">Fashion</span>
+    </a>
+  </div>
+  <ul class="nav__links">
+    <li><a href="shop.html">Shop</a></li>
+    <li><a href="index.html#collections">Collections</a></li>
+    <li><a href="index.html#lookbook">Lookbook</a></li>
+    <li><a href="index.html#exhibitions">Exhibitions</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <div class="nav__actions">
+    <button class="btn-theme" onclick="toggleTheme()" aria-label="Toggle day/night mode">☀</button>
+    <button class="btn-search" aria-label="Search" onclick="toggleSearch()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    </button>
+    <a class="btn-cart" aria-label="Shopping bag" href="shop.html#cart">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <span class="cart-count" id="cartCount">0</span>
+    </a>
+    <button class="btn-menu" id="menuBtn" aria-label="Menu" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="shop.html">Shop</a></li>
+    <li><a href="index.html#collections">Collections</a></li>
+    <li><a href="index.html#exhibitions">Exhibitions</a></li>
+    <li><a href="#studio" onclick="toggleMenu()">Studio</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</div>
+
+<!-- SEARCH OVERLAY -->
+<div class="search-overlay" id="searchOverlay">
+  <button class="search-close" onclick="toggleSearch()">✕</button>
+  <div class="search-inner">
+    <p class="search-label">What are you looking for?</p>
+    <input type="text" class="search-input" placeholder="Search pieces, styles…" />
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero hero--page" id="hero">
+  <div class="hero__canvas">
+    <div class="hero__panel-right">
+      <img src="images/studio/studio-floor.jpg" alt="The GeoDor workroom, with an industrial sewing machine and a patchwork kaftan on a gold dress form" loading="eager" />
+    </div>
+    <div class="hero__glow"></div>
+    <div class="hero__vline"></div>
+  </div>
+
+  <div class="hero__content">
+    <div class="hero__eyebrow reveal">About GeoDor</div>
+    <h1 class="hero__title reveal">
+      <span>MADE</span>
+      <em>by</em>
+      <span>HAND.</span>
+    </h1>
+    <p class="hero__sub reveal">A Milton Keynes atelier where Ghanaian heritage meets British tailoring, and every hem is folded by hand.</p>
+    <div class="hero__accent-line reveal"></div>
+    <div class="hero__ctas reveal">
+      <a href="#studio" class="btn btn--primary">Inside the Studio</a>
+      <a href="#journey" class="btn btn--ghost">Our Journey</a>
+    </div>
+  </div>
+
+  <div class="hero__scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-track">
+    <span>ANKARA</span><span>·</span>
+    <span>DENIM</span><span>·</span>
+    <span>TAILORING</span><span>·</span>
+    <span>HAND-FOLDED DETAIL</span><span>·</span>
+    <span>MADE IN MILTON KEYNES</span><span>·</span>
+    <span>GHANAIAN HERITAGE</span><span>·</span>
+    <span>ANKARA</span><span>·</span>
+    <span>DENIM</span><span>·</span>
+    <span>TAILORING</span><span>·</span>
+    <span>HAND-FOLDED DETAIL</span><span>·</span>
+    <span>MADE IN MILTON KEYNES</span><span>·</span>
+    <span>GHANAIAN HERITAGE</span><span>·</span>
+  </div>
+</div>
+
+<!-- STORY -->
+<section class="about about-page__story" id="story">
+  <div class="container about__grid">
+    <div class="about__img-wrap reveal-up" data-gallery="story">
+      <div class="about__img img-placeholder" data-full="images/studio/studio-mannequins.jpg" data-title="On the Stand" data-caption="A patchwork kaftan and print blouse in progress">
+        <div class="placeholder-inner"><img src="images/studio/studio-mannequins-sm.jpg" alt="A patchwork batik kaftan on a gold dress form beside a blue floral print blouse" loading="lazy" /></div>
+      </div>
+      <div class="about__stat-card">
+        <div class="stat-number">4+</div>
+        <div class="stat-label">Years Crafting Vision</div>
+      </div>
+    </div>
+    <div class="about__content reveal-up">
+      <div class="section-tag">/ Our Story</div>
+      <h2 class="section-title">Rooted in <em>Ghana</em>,<br/>Cut in Britain</h2>
+      <p class="about__lead">GeoDor Fashion is the label of designer Vera Amoako: Ghanaian-trained, Milton Keynes-based, and devoted to the craft of the hand.</p>
+      <p class="about__body">Vera trained in fashion design at KNUST in Kumasi, Ghana, before bringing her practice to the UK. Her work combines denim and sharp tailoring with Ankara, the bold West African wax print, finished with sculptural, hand-folded details that have become the GeoDor signature.</p>
+      <p class="about__body">The same discipline runs through her industry experience in sample production, where precision and getting it right first time are everything. Every GeoDor piece is held to that standard.</p>
+      <div class="signature">
+        <div>
+          <div class="signature__name">Vera Amoako</div>
+          <div class="signature__role">Founder &amp; Designer</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATEMENT -->
+<section class="statement">
+  <div class="section-tag center">/ The GeoDor Way</div>
+  <blockquote>Every piece starts on the cutting table. Ankara points are cut, folded and pinned by hand before a single stitch, <em>so no two hems are ever alike.</em></blockquote>
+  <div class="hero__accent-line"></div>
+</section>
+
+<!-- STUDIO / WORKPLACE -->
+<section class="studio" id="studio">
+  <div class="container">
+    <div class="studio__head">
+      <div>
+        <div class="section-tag">/ The Workplace</div>
+        <h2 class="section-title">Inside the <em>Studio</em></h2>
+      </div>
+      <p>Our Milton Keynes workroom is where every GeoDor piece is drafted, cut and sewn. Industrial lockstitch and overlock machines sit beside dress forms and a library of hand-picked wax prints, so each idea moves from sketch to stand to finished garment under one roof.</p>
+    </div>
+
+    <div data-gallery="studio">
+      <div class="studio-hero reveal-up" data-full="images/studio/studio-floor.jpg" data-title="The Workroom" data-caption="Milton Keynes, UK">
+        <img src="images/studio/studio-floor-sm.jpg" alt="The GeoDor workroom: cutting table with overlocker, industrial sewing machine and a patchwork kaftan on a gold dress form" loading="lazy" />
+        <div class="studio-hero__tag"><b>The Workroom</b>Milton Keynes, UK</div>
+      </div>
+
+      <div class="studio-grid">
+        <figure class="studio-tile reveal-up" data-full="images/studio/studio-mannequins.jpg" data-title="01 · On the Stand" data-caption="Patchwork kaftan and print blouse in progress">
+          <div class="studio-tile__img"><img src="images/studio/studio-mannequins-sm.jpg" alt="Patchwork batik kaftan and blue floral blouse on dress forms" loading="lazy" style="object-position: 30% center" /></div>
+          <figcaption><b>01</b>On the Stand</figcaption>
+        </figure>
+        <figure class="studio-tile reveal-up" data-full="images/studio/studio-machine.jpg" data-title="02 · The Machine Room" data-caption="Industrial lockstitch station">
+          <div class="studio-tile__img"><img src="images/studio/studio-machine-sm.jpg" alt="Industrial lockstitch sewing machine on its table with a mesh-back chair" loading="lazy" /></div>
+          <figcaption><b>02</b>The Machine Room</figcaption>
+        </figure>
+        <figure class="studio-tile reveal-up" data-full="images/studio/studio-fabrics.jpg" data-title="03 · The Fabric Library" data-caption="Ankara and wax prints, sorted and ready to cut">
+          <div class="studio-tile__img"><img src="images/studio/studio-fabrics-sm.jpg" alt="Shelving stacked with folded Ankara and wax-print fabrics" loading="lazy" /></div>
+          <figcaption><b>03</b>The Fabric Library</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process">
+  <div class="container">
+    <div class="section-tag">/ How It's Made</div>
+    <h2 class="section-title">From Table to <em>Runway</em></h2>
+    <div class="process-grid">
+      <div class="process-step reveal-up">
+        <div class="process-step__num">01</div>
+        <h3>Cut</h3>
+        <p>Every pattern is cut by hand, with the print placed deliberately and never left to chance.</p>
+      </div>
+      <div class="process-step reveal-up">
+        <div class="process-step__num">02</div>
+        <h3>Fold &amp; Pin</h3>
+        <p>Ankara points are folded and pinned by hand, building the sculptural details that define our silhouettes.</p>
+      </div>
+      <div class="process-step reveal-up">
+        <div class="process-step__num">03</div>
+        <h3>Stitch</h3>
+        <p>Constructed on industrial flatbed and overlock machines for clean, strong, lasting seams.</p>
+      </div>
+      <div class="process-step reveal-up">
+        <div class="process-step__num">04</div>
+        <h3>Finish</h3>
+        <p>Pressed, finished and quality-checked by eye. Right first time, every time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CREDENTIALS -->
+<section class="credentials">
+  <div class="container">
+    <div class="credentials-grid">
+      <div class="cred-card reveal-up">
+        <h3>Education</h3>
+        <div class="cred-big">BSc Fashion Design</div>
+        <p>Second Class Upper · Kwame Nkrumah University of Science and Technology (KNUST), Ghana · 2022</p>
+      </div>
+      <div class="cred-card reveal-up">
+        <h3>Industry</h3>
+        <div class="cred-big">Sample Production</div>
+        <p>Sanderson Design Group: precision sampling for a heritage British design house, where quality is non-negotiable.</p>
+      </div>
+      <div class="cred-card reveal-up">
+        <h3>Craft</h3>
+        <ul>
+          <li>Fashion design</li>
+          <li>Garment construction</li>
+          <li>Flatbed &amp; overlock machining</li>
+          <li>Cutting &amp; finishing</li>
+          <li>Quality control</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNEY -->
+<section class="journey" id="journey">
+  <div class="container journey__grid">
+    <div class="journey__intro">
+      <div class="section-tag">/ Our Journey</div>
+      <h2 class="section-title">Shows &amp; <em>Milestones</em></h2>
+      <p>From a design degree in Ghana to runways and exhibition floors across the UK, these are the moments that have shaped GeoDor.</p>
+      <a href="index.html#exhibitions" class="btn btn--outline" style="margin-top:32px">See the Exhibitions</a>
+    </div>
+    <div class="timeline">
+      <div class="tl-item reveal-up">
+        <div class="tl-date">23–25 Oct 2026</div>
+        <h3>Black History Month</h3>
+        <span class="ex-row__role">Exhibitor</span>
+      </div>
+      <div class="tl-item highlight reveal-up">
+        <div class="tl-date">10 Oct 2026</div>
+        <h3>Ankara Festival Fashion Show</h3>
+        <p>Showed a full runway collection and designed and made the host's dress.</p>
+        <span class="ex-row__role solid">Gold Exhibitor</span>
+      </div>
+      <div class="tl-item reveal-up">
+        <div class="tl-date">11 Jul 2026</div>
+        <h3>Ghana Party in the Park</h3>
+        <p>Glasgow</p>
+        <span class="ex-row__role">Exhibitor</span>
+      </div>
+      <div class="tl-item reveal-up">
+        <div class="tl-date">04 Jul 2026</div>
+        <h3>African Diaspora Foundation Festival</h3>
+        <p>Milton Keynes</p>
+        <span class="ex-row__role">Exhibitor</span>
+      </div>
+      <div class="tl-item reveal-up">
+        <div class="tl-date">22 Feb 2026</div>
+        <h3>London Fashion Week</h3>
+        <p>London</p>
+        <span class="ex-row__role">Attendee</span>
+      </div>
+      <div class="tl-item reveal-up">
+        <div class="tl-date">Milton Keynes</div>
+        <h3>MK Afro Diaspora Awards</h3>
+        <span class="ex-row__role">Special Guest</span>
+      </div>
+      <div class="tl-item reveal-up">
+        <div class="tl-date">05 Jul 2025</div>
+        <h3>African Diaspora Foundation Fashion Show</h3>
+        <p>Milton Keynes</p>
+        <span class="ex-row__role">Participating Designer</span>
+      </div>
+      <div class="tl-item reveal-up">
+        <div class="tl-date">14 Sep 2024</div>
+        <h3>Live Fashion Show</h3>
+        <span class="ex-row__role">Designer's Assistant</span>
+      </div>
+      <div class="tl-item reveal-up">
+        <div class="tl-date">2022</div>
+        <h3>BSc Fashion Design, KNUST</h3>
+        <p>Graduated with Second Class Upper honours, Ghana.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="about-cta">
+  <div class="container">
+    <div class="section-tag center">/ Work With Us</div>
+    <h2 class="section-title center">Commissions &amp; <em>Collaborations</em></h2>
+    <p class="shop-cta__sub" style="margin-top:20px">From bespoke commissions to runway shows and brand partnerships, we'd love to hear what you have in mind.</p>
+    <div class="about-cta__btns">
+      <a href="index.html#contact" class="btn btn--primary">Start a Conversation</a>
+      <a href="shop.html" class="btn btn--ghost">Shop the Collection</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <div class="footer-logo">
+          <div class="nav__logo-wordmark"><span class="logo-geo">GEO</span><span class="logo-dor">DOR</span></div>
+          <span class="logo-sub">Fashion</span>
+        </div>
+        <p>Fashion as language.<br/>Wear your world.</p>
+      </div>
+      <div class="footer__cols">
+        <div class="footer-col">
+          <h4>Discover</h4>
+          <ul>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="index.html#collections">Collections</a></li>
+            <li><a href="index.html#lookbook">Lookbook</a></li>
+            <li><a href="index.html#exhibitions">Exhibitions</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Info</h4>
+          <ul>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="#studio">Our Studio</a></li>
+            <li><a href="legal.html#shipping">Shipping Policy</a></li>
+            <li><a href="legal.html#returns">Returns</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Help</h4>
+          <ul>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="legal.html#privacy">Privacy</a></li>
+            <li><a href="legal.html#terms">Terms</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>© 2026 GeoDor Fashion. All rights reserved.</p>
+      <div class="footer__legal">
+        <a href="legal.html#privacy">Privacy Policy</a>
+        <a href="legal.html#terms">Terms of Service</a>
+        <a href="legal.html#cookies">Cookie Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/main.js"></script>
+<script src="js/gallery.js"></script>
+</body>
+</html>
